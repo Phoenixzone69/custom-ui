@@ -580,14 +580,15 @@ class CartePiece extends LitElement {
         display: flex;
         flex-direction: column;
         height: 100%;
-        font-size: 12px; /* Set a base font size for the card */
       }
       ha-card {
+        container-type: inline-size;
+        container-name: carte-piece;
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 1em;
+        padding: clamp(8px, 3cqi, 16px);
         box-sizing: border-box;
       }
       .content-wrapper {
@@ -595,7 +596,7 @@ class CartePiece extends LitElement {
         flex-direction: column;
         justify-content: space-between;
         flex-grow: 1;
-        gap: 1em;
+        gap: clamp(8px, 3cqi, 16px);
       }
       .info-grid {
         display: grid;
@@ -605,18 +606,18 @@ class CartePiece extends LitElement {
           "i s";
         grid-template-columns: min-content 1fr;
         grid-template-rows: auto auto;
-        gap: 0 0.8em;
+        gap: 0 clamp(8px, 2cqi, 12px);
         align-items: center;
         text-align: left;
       }
       .info-grid-icon {
         grid-area: i;
-        --mdc-icon-size: 3em;
+        --mdc-icon-size: clamp(32px, 12cqi, 48px);
         color: var(--paper-item-icon-color, #44739e);
       }
       .info-grid-name {
         grid-area: n;
-        font-size: 1.6em;
+        font-size: clamp(16px, 6cqi, 24px);
         font-weight: bold;
         white-space: nowrap;
         overflow: hidden;
@@ -626,8 +627,8 @@ class CartePiece extends LitElement {
         grid-area: s;
         display: flex;
         flex-wrap: wrap;
-        gap: 1em;
-        font-size: 1em;
+        gap: clamp(8px, 2cqi, 16px);
+        font-size: clamp(12px, 4cqi, 15px);
         color: var(--secondary-text-color);
       }
       .info-grid-sensors span {
@@ -641,7 +642,7 @@ class CartePiece extends LitElement {
       .media-content {
         width: 100%;
         height: auto;
-        border-radius: 0.8em;
+        border-radius: clamp(8px, 2cqi, 12px);
         overflow: hidden;
       }
       .media-content > * {
@@ -651,49 +652,35 @@ class CartePiece extends LitElement {
         object-fit: cover;
       }
       .custom-graph-svg {
-        height: 150px; /* Keep a fixed height for the graph SVG container */
+        height: 150px;
       }
       .graph-placeholder {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 150px;
         background: rgba(0,0,0,0.05);
-        border-radius: 0.8em;
-        cursor: pointer;
-        text-align: center;
+        border-radius: clamp(8px, 2cqi, 12px);
         color: var(--primary-text-color);
-        transition: background-color 0.2s;
-      }
-      .graph-placeholder:hover {
-        background: rgba(0,0,0,0.1);
-      }
-      .graph-placeholder ha-icon {
-        --mdc-icon-size: 3em;
-      }
-      .graph-placeholder .placeholder-text {
-        margin-top: 0.5em;
-        font-weight: 500;
       }
       .action-buttons {
         display: flex;
         justify-content: center;
-        gap: 0.5em;
+        gap: clamp(6px, 2cqi, 10px);
         width: 100%;
       }
       .action-button {
         flex: 1;
-        min-width: 0; /* Allow shrinking */
+        min-width: 0;
         cursor: pointer;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 0.5em;
+        gap: clamp(4px, 1.5cqi, 8px);
         box-sizing: border-box;
-        padding: 0.8em;
-        border-radius: 0.8em;
+        padding: clamp(8px, 3cqi, 12px);
+        border-radius: clamp(8px, 2cqi, 12px);
         border: 1px solid var(--divider-color);
         background: var(--card-background-color);
         transition: background-color 0.2s;
@@ -702,7 +689,7 @@ class CartePiece extends LitElement {
         background: rgba(var(--rgb-primary-text-color), 0.05);
       }
       .action-button ha-state-icon {
-        --mdc-icon-size: 1.8em;
+        --mdc-icon-size: clamp(20px, 8cqi, 28px);
       }
       .button-text {
         flex: 1;
@@ -718,13 +705,23 @@ class CartePiece extends LitElement {
         width: 100%;
       }
       .button-name {
-        font-size: 1.1em;
+        font-size: clamp(12px, 4.5cqi, 16px);
         font-weight: bold;
         color: var(--primary-text-color);
       }
       .button-state {
-        font-size: 1em;
+        font-size: clamp(11px, 4cqi, 14px);
         color: var(--secondary-text-color);
+      }
+
+      /* Style for smaller cards */
+      @container carte-piece (width < 300px) {
+        .button-name, .button-state {
+          display: none;
+        }
+        .action-button {
+            justify-content: center;
+        }
       }
     `;
   }
